@@ -29,11 +29,25 @@ export const putPet = (pet) =>
 
 export const postPet = (pet) =>
   new Promise((resolves, rejects) => {
+    axios
+      .post(`Veteriner`, pet)
+      .then((data) => resolves(data))
+      .catch((err) => rejects(err));
+  });
+export const deletePet = (id) =>
+  new Promise((resolves, rejects) => {
     const config = {
       Headers: { "Content-Type": "application/json;charset=utf-8" },
     };
     axios
-      .post(`Veteriner`, pet, config)
+      .delete(`Veteriner/${id}`, config)
+      .then((data) => resolves(data))
+      .catch((err) => rejects(err));
+  });
+  export const getAllOwners = () =>
+  new Promise((resolves, rejects) => {
+    axios
+      .get("Owner")
       .then((data) => resolves(data))
       .catch((err) => rejects(err));
   });
